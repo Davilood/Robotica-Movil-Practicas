@@ -8,19 +8,12 @@ export default defineConfig({
 	base: '/Robotica-Movil-Practicas',
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'Cuaderno de Robótica Móvil',
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Davilood/Robotica-Movil-Practicas' }],
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
+					label: 'Entradas',
+					items: [{ autogenerate: { directory: 'posts' } }],
 				},
 			],
 		}),
