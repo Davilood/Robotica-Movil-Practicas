@@ -4,6 +4,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://davilood.github.io',
+	base: '/Robotica-Movil-Practicas',
 	integrations: [
 		starlight({
 			title: 'My Docs',
