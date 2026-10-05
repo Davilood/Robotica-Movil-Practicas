@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+
+const practices = (await getCollection('docs', ({ id }) => id.startsWith('posts/')))
+  .sort((a, b) => (a.data.sidebar?.order ?? Infinity) - (b.data.sidebar?.order ?? Infinity)
+    || a.id.localeCompare(b.id, 'es', { numeric: true }));
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div class="practice-grid">
+  {practices.map((practice, index) => (
+    <a class="practice-card" href={`${base}/${practice.id}/`}>
+      <div class="practice-meta">
+        <span class="practice-number">{String(index + 1).padStart(2, '0')}</span>
+        {practice.data.sidebar?.badge && (
+          <span class="practice-status">
+            {typeof practice.data.sidebar.badge === 'string'
+              ? practice.data.sidebar.badge : practice.data.sidebar.badge.text}
+          </span>
+        )}
+      </div>
+      <h3>{practice.data.title}</h3>
+      <p>{practice.data.description}</p>
+      <span class="practice-link">Abrir práctica <span aria-hidden="true">↗</span></span>
+    </a>
+  ))}
+</div>

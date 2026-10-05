@@ -1,29 +1,31 @@
 ---
-title: Blog de prácticas
-description: Diario de trabajo de las prácticas de Robótica Móvil.
+title: Blog de prácticas de Robótica Móvil
+description: Un cuaderno para explorar, programar y aprender con robots móviles. Todas las prácticas, paso a paso.
 template: splash
+hero:
+  title: Robótica móvil.<br />Aprender haciendo.
+  tagline: Un cuaderno de laboratorio para documentar cada paso, de la primera idea a las pruebas con el robot.
+  actions:
+    - text: Explorar las prácticas
+      link: '#prácticas'
+      icon: down-arrow
+    - text: Ver el código
+      link: https://github.com/Davilood/Robotica-Movil-Practicas
+      icon: external
+      variant: secondary
 ---
 
-import { getCollection } from 'astro:content';
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import PracticeList from '../../components/PracticeList.astro';
 
-export const posts = (await getCollection('docs', ({ id }) => id.startsWith('posts/')))
-	.sort((first, second) => second.id.localeCompare(first.id));
+<div className="notebook-label">OBSERVAR / PROGRAMAR / EXPERIMENTAR</div>
 
-## Cuaderno de prácticas
+## Prácticas
 
-Registro de objetivos, pruebas y resultados del trabajo con el robot móvil.
+El trabajo del laboratorio, sesión a sesión. Objetivos, desarrollo y resultados en un mismo lugar.
 
-{posts.length > 0 ? (
-	<CardGrid>
-		{posts.map((post) => (
-			<LinkCard
-				title={post.data.title}
-				description={post.data.description}
-				href={`./${post.id}/`}
-			/>
-		))}
-	</CardGrid>
-) : (
-	<p>Aún no hay entradas. La primera práctica aparecerá aquí.</p>
-)}
+<PracticeList />
+
+<aside className="notebook-note">
+  <strong>Un cuaderno en construcción</strong>
+  <p>Las prácticas irán tomando forma con el código, las pruebas y las conclusiones de cada sesión.</p>
+</aside>

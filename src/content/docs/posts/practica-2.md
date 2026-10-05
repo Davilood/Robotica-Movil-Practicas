@@ -1,8 +1,8 @@
 ---
-title: Práctica 1 | Navegación pseudoaleatoria con FSM
-description: Primer registro de objetivos, preparación, pruebas y conclusiones.
+title: Práctica 2
+description: Segunda sesión del cuaderno de Robótica Móvil.
 sidebar:
-  order: 1
+  order: 2
   badge:
     text: Por completar
     variant: note
