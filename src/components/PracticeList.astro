@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 
-const practices = (await getCollection('docs', ({ id }) => id.startsWith('posts/')))
+const practices = (await getCollection('docs', ({ id, data }) => id.startsWith('posts/') && !data.draft))
   .sort((a, b) => (a.data.sidebar?.order ?? Infinity) - (b.data.sidebar?.order ?? Infinity)
     || a.id.localeCompare(b.id, 'es', { numeric: true }));
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -20,8 +20,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         )}
       </div>
       <h3>{practice.data.title}</h3>
-      <p>{practice.data.description}</p>
-      <span class="practice-link">Abrir práctica <span aria-hidden="true">↗</span></span>
+      {practice.data.description && <p>{practice.data.description}</p>}
+      <span class="practice-link">Abrir práctica <span aria-hidden="true">→</span></span>
     </a>
   ))}
 </div>

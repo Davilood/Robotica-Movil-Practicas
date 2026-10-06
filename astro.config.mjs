@@ -9,8 +9,8 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
-			title: 'Cuaderno de Robótica Móvil',
-			description: 'Blog de prácticas de Robótica Móvil: objetivos, desarrollo, pruebas y conclusiones.',
+			title: 'Robótica Móvil',
+			description: 'Blog de prácticas de Robótica Móvil.',
 			locales: { root: { label: 'Español', lang: 'es' } },
 			customCss: ['./src/styles/custom.css'],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Davilood/Robotica-Movil-Practicas' }],

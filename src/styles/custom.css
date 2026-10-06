@@ -1,71 +1,279 @@
+/* One blue; all supporting colors are tints or shades of this value. */
 :root {
-  --sl-color-accent-low: #10352f;
-  --sl-color-accent: #42bfa0;
-  --sl-color-accent-high: #b5efdc;
+  --notebook-blue: #0091ff;
+  --sl-color-accent: var(--notebook-blue);
+  --sl-color-accent-low: color-mix(in srgb, var(--notebook-blue) 22%, #101820);
+  --sl-color-accent-high: color-mix(in srgb, var(--notebook-blue) 45%, white);
+  --notebook-glow: color-mix(in srgb, var(--notebook-blue) 30%, #101820);
+  --notebook-border: color-mix(in srgb, var(--notebook-blue) 25%, #202830);
+  --notebook-button-ink: color-mix(in srgb, var(--notebook-blue) 20%, black);
   --sl-font: 'Segoe UI', system-ui, sans-serif;
 }
+
 :root[data-theme='light'] {
-  --sl-color-accent-low: #e0f5ee;
-  --sl-color-accent: #087b61;
-  --sl-color-accent-high: #104a3b;
+  --sl-color-accent-low: color-mix(in srgb, var(--notebook-blue) 8%, white);
+  /* A darker shade of the same blue keeps small text readable. */
+  --sl-color-accent-high: color-mix(in srgb, var(--notebook-blue) 75%, black);
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-bg: #ffffff;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: color-mix(in srgb, var(--notebook-blue) 3%, white);
+  --notebook-glow: color-mix(in srgb, var(--notebook-blue) 20%, white);
+  --notebook-border: color-mix(in srgb, var(--notebook-blue) 16%, white);
 }
-.hero { padding-block: clamp(2.5rem, 7vw, 5rem); }
-.hero h1 { max-width: 18ch; letter-spacing: -0.045em; line-height: 1.08; }
-.hero .tagline { max-width: 48ch; }
-.hero .sl-link-button { border-radius: 0.65rem; }
-.site-title { letter-spacing: -0.035em; }
-.notebook-label {
+
+.site-title { color: var(--notebook-blue); letter-spacing: -0.035em; }
+
+header.header {
+  border-bottom-color: var(--notebook-border);
+  box-shadow: 0 2px 20px color-mix(in srgb, var(--notebook-blue) 3%, transparent);
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: 1fr;
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 -1rem;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 78% 30%, var(--notebook-glow), transparent 65%),
+    linear-gradient(var(--notebook-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--notebook-border) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
+  mask-image: linear-gradient(transparent, black 20%, black 70%, transparent);
+}
+
+.hero .copy::before {
+  content: 'BLOG DE PRÁCTICAS';
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--notebook-border);
+  border-radius: 999px;
+  background: var(--sl-color-bg);
   color: var(--sl-color-accent-high);
   font-family: var(--sl-font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
 }
+
+.hero h1 {
+  max-width: 20ch;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+}
+
+.hero-accent { color: var(--notebook-blue); }
+
+.hero .tagline { max-width: 40ch; font-size: 1.1rem; }
+.hero .sl-link-button {
+  border-radius: 999px;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--notebook-blue) 18%, transparent);
+}
+
+.hero .sl-link-button.primary {
+  background: var(--notebook-blue);
+  border-color: var(--notebook-blue);
+  color: var(--notebook-button-ink);
+  font-weight: 650;
+}
+
+.hero .sl-link-button.primary:hover {
+  background: color-mix(in srgb, var(--notebook-blue) 85%, white);
+  border-color: var(--notebook-blue);
+  color: var(--notebook-button-ink);
+}
+
 .practice-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
   gap: 1.25rem;
-  margin-block: 1.75rem 2.5rem;
+  margin-block: 1.5rem 2.5rem;
 }
+
 .practice-grid .practice-card {
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid var(--sl-color-gray-5);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--notebook-border);
   border-radius: 1rem;
-  background: linear-gradient(145deg, var(--sl-color-accent-low), var(--sl-color-bg) 65%);
+  background: linear-gradient(150deg, var(--sl-color-bg) 45%, var(--sl-color-accent-low));
+  box-shadow: 0 4px 24px color-mix(in srgb, var(--notebook-blue) 5%, transparent);
   color: var(--sl-color-text);
   text-decoration: none;
-  transition: border-color 160ms ease, transform 160ms ease;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
-.practice-card:hover { border-color: var(--sl-color-accent); transform: translateY(-3px); }
+
+.practice-card:hover {
+  border-color: var(--sl-color-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px color-mix(in srgb, var(--notebook-blue) 12%, transparent);
+}
+
 .practice-card:focus-visible { outline: 3px solid var(--sl-color-accent); outline-offset: 4px; }
 .practice-card .practice-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
 .practice-number {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.8rem;
+  background: var(--sl-color-accent-low);
+  border: 1px solid var(--notebook-border);
   color: var(--sl-color-accent-high);
   font-family: var(--sl-font-mono);
-  font-size: 2.75rem;
-  line-height: 1;
-  letter-spacing: -0.06em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
 }
+
 .practice-card .practice-status {
   margin: 0;
-  border: 1px solid var(--sl-color-gray-5);
+  border: 1px solid var(--notebook-border);
   border-radius: 2rem;
   padding: 0.25rem 0.65rem;
   font-size: 0.75rem;
 }
-.practice-card h3 { margin-top: 1.75rem; font-size: 1.4rem; }
-.practice-card p { margin-block: 0.65rem 1.75rem; }
+
+.practice-card h3 { margin-block: 1.5rem 2rem; font-size: 1.65rem; letter-spacing: -0.03em; }
+.practice-card p { margin-block: -1rem 1.75rem; }
+
 .practice-card .practice-link {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--notebook-border);
+  align-items: center;
   color: var(--sl-color-accent-high);
+  font-size: 0.85rem;
   font-weight: 600;
 }
-.notebook-note { border-inline-start: 3px solid var(--sl-color-accent); padding: 0.5rem 1.25rem; margin-block: 2rem; }
-.notebook-note p { margin-top: 0.35rem; color: var(--sl-color-gray-2); }
+
+.practice-link span {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--sl-color-accent-low);
+  font-size: 1.15rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .practice-grid .practice-card { transition: none; transform: none; }
+}
+
+.sl-markdown-content .state-diagram { margin: 2rem 0; }
+
+.state-diagram > a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--notebook-border);
+  border-radius: 0.75rem;
+  background: #fff;
+  cursor: zoom-in;
+}
+
+.state-diagram > a:focus-visible {
+  outline: 3px solid var(--sl-color-accent);
+  outline-offset: 4px;
+}
+
+.state-diagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.state-diagram figcaption {
+  margin-top: 0.75rem;
+  color: var(--sl-color-gray-2);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.sl-markdown-content .video-preview { margin: 1.5rem 0 2rem; }
+
+.video-preview-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--notebook-border);
+  border-radius: 0.75rem;
+  background: #101820;
+  isolation: isolate;
+}
+
+.video-preview-link::after {
+  content: '';
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, rgb(0 0 0 / 85%));
+  z-index: 1;
+}
+
+.video-preview-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.video-preview-link .video-play {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin: 0;
+  padding-left: 0.2rem;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 75%);
+  color: white;
+  font-size: 1.5rem;
+  z-index: 2;
+}
+
+.video-preview-link .video-label {
+  position: absolute;
+  inset: auto 1rem 1rem;
+  margin: 0;
+  color: white;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  font-weight: 600;
+  z-index: 2;
+}
+
+.video-preview-link:hover .video-play,
+.video-preview-link:focus-visible .video-play {
+  background: var(--sl-color-accent);
+  color: var(--notebook-button-ink);
+}
+
+.video-preview-link:focus-visible {
+  outline: 3px solid var(--sl-color-accent);
+  outline-offset: 4px;
+}
+
+.video-preview figcaption {
+  margin-top: 0.75rem;
+  color: var(--sl-color-gray-2);
+  font-size: 0.875rem;
+  text-align: center;
 }
