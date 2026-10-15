@@ -114,6 +114,6 @@ El controlador rápido, funcionaba también sin la parte integradora, pero, tras
 
 También, para el calcular el Centroide de la línea, he realizado una máscara, o un "recorte" de la imagen vertical, de 0 a 480 por 75 -> 300, para eliminar aquellas filas que no son importantes (Cielo), y también para calcular el centroide más delante, recortando la parte más cerca del coche (0 -> 75), para intentar "adelantar" movimientos.
 
-Salvo estos dos cambios, las ganancias del controlador PID (Kp, Kd y Ki) se ajustaron mediante prueba y error, observando el comportamiento del coche (si oscilaba, si se iba en curvas pronunciadas...), el tiempo recorrido y el Error Medio
+Salvo estos dos cambios, las ganancias del controlador PID (Kp, Kd y Ki) se ajustaron mediante prueba y error, observando el comportamiento del coche (si oscilaba, si se iba en curvas pronunciadas...), el tiempo recorrido y el Error Medio.
 
 El controlador de baja velocidad se incluye para hacer la siguiente reflexión: cuanto más se baja la velocidad lineal, más fácil resulta ajustar el controlador y más se puede reducir el error medio. Es decir, hay un compromiso claro entre **velocidad** y **precisión**, y en esta práctica se ha optado por la velocidad.
